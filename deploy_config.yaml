@@ -17,7 +17,7 @@
        delegate_to: 127.0.0.1
      - name: Apply STIG Interface Selector Configs
        cisco.ios.ios_config:
-         src: "/home/tcrowe/shares/iCloud\ Drive/Ansible/GitRepos/network_stig_automation/temp/stig_int_config/{{ inventory_hostname }}_temp_backup.txt"
+         src: "/home/tcrowe/shares/iCloud\ Drive/GitRepos/network_stig_automation/temp/stig_int_config/{{ inventory_hostname }}_temp_backup.txt"
        register: command_result
      - name: Apply STIG Baseline Config - IOS-XE Switch
        cisco.ios.ios_config:

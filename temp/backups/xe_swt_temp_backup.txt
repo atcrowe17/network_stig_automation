@@ -1,8 +1,8 @@
 Building configuration...
 
-Current configuration : 4557 bytes
+Current configuration : 4611 bytes
 !
-! Last configuration change at 19:07:49 UTC Tue Oct 5 2021 by cisco
+! Last configuration change at 19:13:02 UTC Tue Oct 5 2021 by cisco
 !
 version 15.2
 no service pad
@@ -147,6 +147,9 @@ interface GigabitEthernet1/3
 !
 interface Vlan100
  ip address 3.3.3.3 255.255.255.0
+ no ip redirects
+ no ip unreachables
+ no ip proxy-arp
 !
 ip forward-protocol nd
 !
