@@ -1,0 +1,56 @@
+!
+interface Loopback0
+ no ip directed-broadcast
+ no ip unreachables
+ no ip mask-reply
+ no ip redirects
+ no ip proxy-arp
+!
+interface Tunnel100
+ no ip directed-broadcast
+ no ip unreachables
+ no ip mask-reply
+ no ip redirects
+ no ip proxy-arp
+!
+interface GigabitEthernet0/0
+ no ip directed-broadcast
+ no ip unreachables
+ no ip mask-reply
+ no ip redirects
+ no ip proxy-arp
+ no lldp transmit
+!
+interface GigabitEthernet0/1
+ spanning-tree bpduguard enable
+!
+interface GigabitEthernet0/2
+ spanning-tree guard root
+!
+interface GigabitEthernet0/3
+ no ip directed-broadcast
+ no ip unreachables
+ no ip mask-reply
+ no ip redirects
+ no ip proxy-arp
+ no lldp transmit
+!
+interface GigabitEthernet1/0
+ description ** DISABLED **
+!
+interface GigabitEthernet1/1
+ description ** NO MATCH **
+!
+interface GigabitEthernet1/2
+ description ** NO MATCH **
+!
+interface GigabitEthernet1/3
+ description ** NO MATCH **
+!
+interface Vlan100
+ no ip directed-broadcast
+ no ip unreachables
+ no ip mask-reply
+ no ip redirects
+ no ip proxy-arp
+!

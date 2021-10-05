@@ -1,0 +1,37 @@
+---
+- hosts: xe_swt
+  gather_facts: true
+  connection: network_cli
+
+  tasks:
+     - name: Save IOS-XE Configs for Interface 
+       cisco.ios.ios_config:
+         backup: yes
+         backup_options:
+           dir_path: "/home/tcrowe/shares/iCloud\ Drive/Ansible/cml/STIG_Automation/temp/backups"
+           filename: "{{ inventory_hostname }}_temp_backup.txt"
+     - name: Run Interface Selector Python Script Against Temp Backups
+       script: /home/tcrowe/shares/iCloud\ Drive/GitRepos/natom/interface_selector.py
+       args:
+         executable: python3
+       delegate_to: 127.0.0.1
+     - name: Apply STIG Interface Selector Configs
+       cisco.ios.ios_config:
+         src: "/home/tcrowe/shares/iCloud\ Drive/Ansible/cml/STIG_Automation/temp/stig_int_config/{{ inventory_hostname }}_temp_backup.txt"
+       register: command_result
+     - name: Apply STIG Baseline Config - IOS-XE Switch
+       cisco.ios.ios_config:
+         src: "/home/tcrowe/shares/iCloud\ Drive/Ansible/cml/STIG_Automation/stig_b1_templates/stig_bl_ios_xe_swt.txt"
+       register: command_result
+       tags:
+         - stig-bl-iosxe-swt
+     # - name: Current Running to Applied Config Diff
+     #   cisco.ios.ios_config:
+     #     backup: yes
+     #     diff_against: intended
+     #     intended_config: "{{ lookup('file', '/home/tcrowe/shares/iCloud\ Drive/Ansible/cml/deployment_configs/PRLH-U00-IR-01-20210817.txt') }}"
+     #   register: diffresult
+     # - name: Save Results
+     #   copy:
+     #     content: "{{ diffresult.results }}"
+     #     dest: "/home/tcrowe/shares/iCloud Drive/Ansible/cml/STIG_Automation/config_diff_{{ inventory_hostname }}.txt"

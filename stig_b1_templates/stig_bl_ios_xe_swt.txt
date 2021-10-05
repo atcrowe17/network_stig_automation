@@ -1,0 +1,44 @@
+no boot network
+no ip boot server
+no ip bootp server
+no ip finger
+no ip http server
+no ip rcmd rcp-enable
+no ip rcmd rsh-enable
+no service config
+no service finger
+no service tcp-small-servers
+no service udp-small-servers
+no service pad
+no ip gratuitous-arps
+no lldp run
+no cdp run
+ip cef
+ipv6 hop-limit 128
+ip http max-connections 2
+line vty 0 4
+ session-limit 2
+ transport input ssh
+ exec-timeout 10 0
+line vty 5 15
+ exec-timeout 10 0
+line con 0
+ exec-timeout 10 0
+archive
+ log config
+  logging enable
+login block-for 900 attempts 3 within 120
+logging userinfo
+login on-failure log
+login on-success log
+service timestamps log datetime localtime
+no ip http secure-server
+ip ssh version 2
+ip ssh server algorithm encryption aes256-ctr aes192-ctr aes128-ctr 
+service password-encryption
+do show run | in enable secret
+logging buffered 200000 informationa
+logging userinfo
+spanning-tree loopguard default
+ip igmp snooping
+spanning-tree mode rapid-pvst
