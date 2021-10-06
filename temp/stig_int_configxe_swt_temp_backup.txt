@@ -1,9 +1,0 @@
-!
-interface GigabitEthernet0/0
- no ip directed-broadcast
- no ip unreachables
- no ip mask-replys
- no ip redirects
- no ip proxy-arp
- no lldp transmit
-!

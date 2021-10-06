@@ -5,6 +5,8 @@ import os
 #file_name = input("File Name:")
 #print(file_name)
 
+current_dir = os.path.dirname(os.path.abspath('interface_selector.py'))
+
 def add_to_interface_dict(interface):
     interface_dict['interface_table'].append(interface)
 
@@ -90,7 +92,7 @@ def no_match_int(int_re_result_item):
 
 #Takes a Cisco config file and creates a file called re_results.txt with just the interface configs
 def ints_from_config (config_file):
-    file_open = open(config_file)
+    file_open = open(os.path.join(current_dir+'/scripts/temp/backups/', config_file), 'r')
     print(file_open)
     #matches interface configuration sections
     re_get_ints = re.compile(r'(?<=!\n)(interface.*\n)(.*\n)*?(?=!)', re.M)
@@ -155,10 +157,9 @@ def config_gen_ints_no_match(no_match_int):
     return(loopback_config_list)
 
 def config_gen_ints(ints_to_gen, int_config_file):
-    directory = "/home/tcrowe/shares/iCloud Drive/Ansible/cml/STIG_Automation/temp/stig_int_config/"
-    int_config = open(directory + filename, 'w')
+    int_config = open(os.path.join(current_dir+'/scripts/temp/stig_int_config/', int_config_file), 'w')
     int_config.writelines("!\n")
-    for interface in interface_dict['interface_table']:
+    for interface in ints_to_gen['interface_table']:
         if interface['type'] == "l2_access":
             l2_access_int_config = config_gen_l2_access(interface)
             int_config.writelines(l2_access_int_config)
@@ -185,11 +186,10 @@ def config_gen_ints(ints_to_gen, int_config_file):
             int_config.writelines(no_match_int_config)
             print("Interface type " + interface['type'] + " not defined.")
 
-directory = "/home/tcrowe/shares/iCloud Drive/GitRepos/network_stig_automation/temp/backups"
-for file in os.listdir(directory):
+for file in os.listdir(current_dir+'/scripts/temp/backups/'):
     interface_dict = {'interface_table': []}
     filename = file
-    interface_config = ints_from_config(os.path.join(directory, file))
+    interface_config = ints_from_config(file)
     config_gen_ints(interface_dict, filename)
 
 #interface_config = ints_from_config('show_run_is02.txt')
@@ -200,6 +200,6 @@ def lisp_int():
     return(None)
 
 
-save_results = open('/home/tcrowe/shares/iCloud Drive/GitRepos/network_stig_automation/temp/interface_table.txt', 'w')
+save_results = open(os.path.join(current_dir+'/scripts/temp/', 'interface_table.txt'), 'w')
 print(interface_dict, file=save_results)
 print(interface_dict)

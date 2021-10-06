@@ -8,20 +8,20 @@
        cisco.ios.ios_config:
          backup: yes
          backup_options:
-           dir_path: "/home/tcrowe/shares/iCloud\ Drive/GitRepos/network_stig_automation/temp/backups"
+           dir_path: "./scripts/temp/backups"
            filename: "{{ inventory_hostname }}_temp_backup.txt"
      - name: Run Interface Selector Python Script Against Temp Backups
-       script: /home/tcrowe/shares/iCloud\ Drive/GitRepos/natom/interface_selector.py
+       script: ./scripts/interface_selector.py
        args:
          executable: python3
        delegate_to: 127.0.0.1
      - name: Apply STIG Interface Selector Configs
        cisco.ios.ios_config:
-         src: "/home/tcrowe/shares/iCloud\ Drive/GitRepos/network_stig_automation/temp/stig_int_config/{{ inventory_hostname }}_temp_backup.txt"
+         src: "./scripts/temp/stig_int_config/{{ inventory_hostname }}_temp_backup.txt"
        register: command_result
      - name: Apply STIG Baseline Config - IOS-XE Switch
        cisco.ios.ios_config:
-         src: "/home/tcrowe/shares/iCloud\ Drive/GitRepos/network_stig_automation/stig_b1_templates/stig_bl_ios_xe_swt.txt"
+         src: "./stig_b1_templates/stig_bl_ios_xe_swt.txt"
        register: command_result
        tags:
          - stig-bl-iosxe-swt

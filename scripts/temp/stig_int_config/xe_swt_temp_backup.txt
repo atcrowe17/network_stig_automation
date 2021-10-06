@@ -6,13 +6,6 @@ interface Loopback0
  no ip redirects
  no ip proxy-arp
 !
-interface Tunnel100
- no ip directed-broadcast
- no ip unreachables
- no ip mask-reply
- no ip redirects
- no ip proxy-arp
-!
 interface GigabitEthernet0/0
  no ip directed-broadcast
  no ip unreachables
@@ -36,7 +29,7 @@ interface GigabitEthernet0/3
  no lldp transmit
 !
 interface GigabitEthernet1/0
- description ** DISABLED **
+ description ** NO MATCH **
 !
 interface GigabitEthernet1/1
  description ** NO MATCH **
@@ -46,11 +39,4 @@ interface GigabitEthernet1/2
 !
 interface GigabitEthernet1/3
  description ** NO MATCH **
-!
-interface Vlan100
- no ip directed-broadcast
- no ip unreachables
- no ip mask-reply
- no ip redirects
- no ip proxy-arp
 !
