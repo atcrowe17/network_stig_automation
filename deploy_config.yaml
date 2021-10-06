@@ -1,5 +1,5 @@
 ---
-- hosts: xe_swt
+- hosts: xe_swt_01,xe_swt_02
   gather_facts: true
   connection: network_cli
 

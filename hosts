@@ -10,7 +10,8 @@ ansible_network_os=cisco.iosxr.iosxr
 ansible_connection=ansible.netcommon.netconf
 
 [ios-xe]
-xe_swt ansible_host=172.16.164.201
+xe_swt_01 ansible_host=172.16.164.201
+xe_swt_02 ansible_host=172.16.164.204
 xe_rtr ansible_host=172.16.164.203
 
 [ios-xe:vars]
