@@ -1,14 +1,13 @@
 Building configuration...
 
-Current configuration : 4387 bytes
+Current configuration : 3657 bytes
 !
-! Last configuration change at 15:58:13 UTC Wed Oct 6 2021 by cisco
+! Last configuration change at 18:46:10 UTC Thu Oct 7 2021
 !
 version 15.2
-no service pad
 service timestamps debug datetime msec
-service timestamps log datetime localtime
-service password-encryption
+service timestamps log datetime msec
+no service password-encryption
 service compress-config
 !
 hostname unconfigured
@@ -22,11 +21,9 @@ vrf definition MGMT
  address-family ipv4
  exit-address-family
 !
-logging userinfo
-logging buffered 200000 informational
 enable secret 5 $1$UBW3$YOOJej1FmtbuEjuw5um.C/
 !
-username cisco privilege 15 password 7 110A1016141D
+username cisco privilege 15 password 0 cisco
 aaa new-model
 !
 !
@@ -46,31 +43,20 @@ aaa session-id common
 !
 vtp domain PRLH_INNER
 vtp mode transparent
-no ip gratuitous-arps
 !
 !
 !
-no ip bootp server
 ip domain-name unconfigured.local
 ip cef
-login block-for 900 attempts 3 within 120
-login on-failure log
-login on-success log
-ipv6 hop-limit 128
 no ipv6 cef
 !
 !
-archive
- log config
-  logging enable
 !
-spanning-tree mode rapid-pvst
-spanning-tree loopguard default
+spanning-tree mode pvst
 spanning-tree extend system-id
 !
 !
 vlan 2,100 
-no cdp run
 !
 ! 
 !
@@ -87,9 +73,6 @@ no cdp run
 !
 interface Loopback0
  ip address 1.1.1.1 255.255.255.0
- no ip redirects
- no ip unreachables
- no ip proxy-arp
 !
 interface GigabitEthernet0/0
  no switchport
@@ -103,50 +86,36 @@ interface GigabitEthernet0/0
 !
 interface GigabitEthernet0/1
  switchport mode access
- switchport port-security
  negotiation auto
- spanning-tree bpduguard enable
 !
 interface GigabitEthernet0/2
  switchport trunk encapsulation dot1q
  switchport mode trunk
  negotiation auto
- spanning-tree guard root
 !
 interface GigabitEthernet0/3
  no switchport
  no ip address
- no ip redirects
- no ip unreachables
- no ip proxy-arp
  negotiation auto
- no lldp transmit
 !
 interface GigabitEthernet1/0
- description ** NO MATCH **
  negotiation auto
 !
 interface GigabitEthernet1/1
- description ** NO MATCH **
  negotiation auto
 !
 interface GigabitEthernet1/2
- description ** DISABLED **
- shutdown
  negotiation auto
 !
 interface GigabitEthernet1/3
- description ** NO MATCH **
  negotiation auto
 !
 ip forward-protocol nd
 !
-no ip http server
-no ip http secure-server
-ip http max-connections 2
+ip http server
+ip http secure-server
 !
-ip ssh version 2
-ip ssh server algorithm encryption aes256-ctr aes192-ctr aes128-ctr
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
 ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
 !
 !
@@ -189,9 +158,7 @@ banner login ^C
 line con 0
 line aux 0
 line vty 0 4
- session-limit 2
  transport input ssh
-line vty 5 15
 !
 !
 end

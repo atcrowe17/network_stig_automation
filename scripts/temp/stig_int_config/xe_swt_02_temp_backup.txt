@@ -1,18 +1,4 @@
 !
-interface Loopback2
- no ip directed-broadcast
- no ip unreachables
- no ip mask-reply
- no ip redirects
- no ip proxy-arp
-!
-interface Tunnel200
- no ip directed-broadcast
- no ip unreachables
- no ip mask-reply
- no ip redirects
- no ip proxy-arp
-!
 interface GigabitEthernet0/0
  no ip directed-broadcast
  no ip unreachables
@@ -25,8 +11,8 @@ interface GigabitEthernet0/1
  description ** NO MATCH **
 !
 interface GigabitEthernet0/2
- spanning-tree guard root
+ description ** NO MATCH **
 !
 interface GigabitEthernet0/3
- description ** DISABLED **
+ description ** NO MATCH **
 !
